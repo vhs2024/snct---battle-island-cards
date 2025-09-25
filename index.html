@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battle Island - Loading</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to top, #0052cc, #1a75ff);
+            font-family: Arial, sans-serif;
+            color: white;
+            flex-direction: column;
+        }
+
+        .logo {
+            max-width: 320px;
+            margin-bottom: 40px;
+        }
+
+        .loading-container {
+            width: 60%;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .loading-bar {
+            height: 100%;
+            width: 0%;
+            background: #00ffcc;
+            transition: width 0.1s linear;
+        }
+
+        .loading-text {
+            margin-top: 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <img src="/img/logo.png" alt="Battle Island Logo" class="logo">
+
+    <div class="loading-container">
+        <div class="loading-bar" id="loading-bar"></div>
+    </div>
+    
+    <div class="loading-text" id="loading-text">0%</div>
+
+    <button id="battleButton" style="
+        background: orange;
+        color: white;
+        font-size: 24px;
+        font-weight: bold;
+        padding: 15px 40px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        margin-top: 20px;
+        display: none; /* Esconde o botão inicialmente */
+    ">Jogar</button>
+
+    <script>
+        let progress = 0;
+        const bar = document.getElementById("loading-bar");
+        const text = document.getElementById("loading-text");
+        const battleButton = document.getElementById("battleButton");
+
+        function load() {
+            if (progress < 100) {
+                progress++;
+                bar.style.width = progress + "%";
+                text.textContent = progress + "%";
+                setTimeout(load, 50); // velocidade da barra (50ms por 1%)
+            } else {
+                text.textContent = "Carregado!";
+                battleButton.style.display = "block"; // Mostra o botão "Battle"
+            }
+        }
+        
+        // Agora, o botão abre "tela-de-batalha.html"
+        battleButton.addEventListener('click', () => {
+            window.open('tela-de-batalha.html', '_blank');
+        });
+
+        load();
+
+    </script>
+
+</body>
+</html>
